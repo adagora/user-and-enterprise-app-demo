@@ -1,0 +1,15 @@
+
+###
+GET http://localhost:13000/enterprise/users?taxId=7162828483
+###
+
+
+###
+POST http://localhost:13000/enterprise/users/add
+Content-Type: application/json
+
+{
+    "taxId": "7162828483",
+    "userHashes": ["0xHash10", "0xHash11"],
+    "permissions": ["perm1", "perm2"]
+}
