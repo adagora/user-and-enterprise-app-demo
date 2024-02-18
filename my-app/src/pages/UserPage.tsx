@@ -3,7 +3,7 @@ import { useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import DynamicTable from "../components/DynamicTable";
 import { columns, ITEMS_PER_PAGE } from "../utils/constants";
-import { useEnterprise } from "../components/services/AccountServices";
+import { useEnterprise } from "../services/AccountServices";
 
 type Props = {
   taxId: string;

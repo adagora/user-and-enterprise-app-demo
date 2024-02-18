@@ -1,5 +1,5 @@
 import "./App.css";
-import { useCreateEnterprise } from "./components/services/AccountServices";
+import { useCreateEnterprise } from "./services/AccountServices";
 import UserPage from "./pages/UserPage";
 
 function App() {

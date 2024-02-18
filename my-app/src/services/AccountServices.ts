@@ -4,9 +4,9 @@ import {
   useMutation,
   useQuery,
 } from "@tanstack/react-query";
-import { IEntepriseUsersResponse } from "../../pages/interfaces/IEntepriseUsersResponse";
-import { API_URL } from "../../utils/constants";
-import { ICreateEnterpriseRequest } from "../../pages/interfaces/ICreateEnterpriseRequest";
+import { IEntepriseUsersResponse } from "../pages/interfaces/IEntepriseUsersResponse";
+import { API_URL } from "../utils/constants";
+import { ICreateEnterpriseRequest } from "../pages/interfaces/ICreateEnterpriseRequest";
 
 interface IResponseError {
   code: number;
