@@ -1,7 +1,3 @@
-# System to manage enterprises and users.
-
-### Users can belong to multiple enterprises. User has the following attributes: Email, First Name, Last Name, Phone Number. Enterprise has the following attributes: Name, Tax ID, Address.
-
 ## How to start
 
 ## install
@@ -20,6 +16,8 @@ npm install
 ## run
 
 ```
+mv .env.example .env
+
 docker build -t my-node-app .
 docker-compose up
 
