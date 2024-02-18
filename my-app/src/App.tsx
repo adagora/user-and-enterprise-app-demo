@@ -16,14 +16,19 @@ function App() {
             createAccount.mutateAsync({
               taxId: DEFALUT_TAX_ID,
               userHashes: ["0xHash1", "0xHash2"],
-              permissions: ["perm1", "perm2"],
+              permissions: ["perm1", "perm2"]
             });
           }}
         >
           {createAccount.isPending ? "Loading..." : "Create Enterprise"}
         </button>
       </header>
-      {<UserPage taxId={DEFALUT_TAX_ID} />}
+      {
+        <UserPage
+          taxId={DEFALUT_TAX_ID}
+          isRefetchTableTransactions={createAccount.isSuccess}
+        />
+      }
     </div>
   );
 }

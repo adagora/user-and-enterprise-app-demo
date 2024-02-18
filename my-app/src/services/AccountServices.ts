@@ -2,7 +2,7 @@ import {
   UseMutationResult,
   UseQueryResult,
   useMutation,
-  useQuery,
+  useQuery
 } from "@tanstack/react-query";
 import { IEntepriseUsersResponse } from "../pages/interfaces/IEntepriseUsersResponse";
 import { API_URL } from "../utils/constants";
@@ -28,9 +28,7 @@ export function useEnterprise(
       }
       return response.json();
     },
-    select: (data) => data.users as IEntepriseUsersResponse[],
-    // TODO: for now
-    refetchInterval: 50000,
+    select: (data) => data.users as IEntepriseUsersResponse[]
   });
 }
 
@@ -45,9 +43,9 @@ export function useCreateEnterprise(): UseMutationResult<
       await fetch(`${API_URL}/enterprise/users/add`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(variables),
-      }).then((res) => res.json()),
+        body: JSON.stringify(variables)
+      }).then((res) => res.json())
   });
 }

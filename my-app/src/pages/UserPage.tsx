@@ -7,11 +7,18 @@ import { useEnterprise } from "../services/AccountServices";
 
 type Props = {
   taxId: string;
+  isRefetchTableTransactions: boolean;
 };
 
-export default function UserPage({ taxId }: Props) {
+export default function UserPage({ taxId, isRefetchTableTransactions }: Props) {
   const [page, setPage] = useState(1);
-  const { data: getUsers, isLoading, error } = useEnterprise(taxId);
+  const { data: getUsers, isLoading, error, refetch } = useEnterprise(taxId);
+
+  useEffect(() => {
+    if (isRefetchTableTransactions) {
+      refetch();
+    }
+  }, [isRefetchTableTransactions, refetch]);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
