@@ -3,13 +3,14 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(255) UNIQUE NOT NULL,
   first_name VARCHAR(50),
   last_name VARCHAR(50),
-  phone_number VARCHAR(20)
+  phone_number VARCHAR(20),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS enterprises (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) UNIQUE,
-  tax_id VARCHAR(20) UNIQUE NOT NULL,
+  tax_id VARCHAR(50) UNIQUE NOT NULL,
   address TEXT
 );
 

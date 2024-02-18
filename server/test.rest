@@ -1,8 +1,9 @@
 
 ###
 GET http://localhost:13000/enterprise/users?taxId=7162828483
-###
 
+###
+GET http://localhost:13000/enterprise/users/registered-after/2024-02-10
 
 ###
 POST http://localhost:13000/enterprise/users/add
@@ -10,6 +11,7 @@ Content-Type: application/json
 
 {
     "taxId": "7162828483",
-    "userHashes": ["0xHash10", "0xHash11"],
-    "permissions": ["perm1", "perm2"]
+    "userHashes": ["0xHash1", "0xHash2"],
+    "permissions": ["perm1", "perm2",]
 }
+

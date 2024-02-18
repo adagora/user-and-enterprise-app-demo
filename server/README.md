@@ -28,7 +28,7 @@ rebuild(optional): docker system prune
 
 ## Configure database | pgAdmin
 
-###inside pgAdmin create new login/group Roles for dbReadPool and dbCreatePool
+### inside pgAdmin create new login/group Roles for dbReadPool and dbCreatePool
 
 for example:
 
@@ -48,4 +48,12 @@ inherit rights from the parent roles? yes
 now, go to db123 databse -> schema -> Tables -> properties of each tables -> Security Tab -> Privileges -> Add row -> here add created roles(e.g for dbcreate give INSERT Privileges, dbread SELECT)
 
 also add user permission on Sequences, dbcreate  with SELECT and USAGE privileges
+```
+
+## Run test
+
+run test cases file or run queries manually from test.rest file.
+
+```
+npx jest enterprisesService.test.js
 ```

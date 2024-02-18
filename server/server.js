@@ -1,5 +1,5 @@
 const express = require("express");
-const { dbReadPool, dbWritePool, createTables } = require("./db");
+const { dbReadPool, dbCreatePool, createTables } = require("./db");
 const cors = require("cors");
 const EnterprisesService = require("./enterprisesService");
 
@@ -11,23 +11,20 @@ app.use(express.json(), cors());
 app.post("/enterprise/users/add", async (req, res) => {
   try {
     const { userHashes, taxId, permissions } = req.body;
-    console.log("### body", req.body);
 
-    const enterprisesService = new EnterprisesService(dbWritePool);
+    const enterprisesService = new EnterprisesService(dbCreatePool);
     const result = await enterprisesService.addUsers(
-      userHashes,
       taxId,
+      userHashes,
       permissions
     );
 
-    // Sending response based on result
     if (result.error) {
       res.status(400).json({ error: result.error });
     } else {
       res.status(200).json({ success: true, message: "Users added" });
     }
   } catch (error) {
-    console.error("Error in endpoint:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
@@ -35,21 +32,33 @@ app.post("/enterprise/users/add", async (req, res) => {
 app.get("/enterprise/users", async (req, res) => {
   try {
     const { taxId } = req.query;
-    console.log("### Query parameters", req.query);
-
-    // Validate taxId parameter
-    if (!taxId || typeof taxId !== "string") {
-      return res.status(400).json({ error: "Invalid taxId parameter" });
-    }
 
     const enterprisesService = new EnterprisesService(dbReadPool);
-    // Retrieve users associated with the enterprise
     const users = await enterprisesService.getEnterpriseUsers(taxId);
 
-    // Sending response with the retrieved users
-    res.status(200).json({ users });
+    if (users.error) {
+      res.status(400).json({ error: users.error });
+    } else {
+      res.status(200).json({ users });
+    }
   } catch (error) {
-    console.error("Error in endpoint:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get("/enterprise/users/registered-after/:date", async (req, res) => {
+  try {
+    const { date } = req.params;
+
+    const enterprisesService = new EnterprisesService(dbReadPool);
+    const users = await enterprisesService.getUsersRegisteredAfterDate(date);
+
+    if (users.error) {
+      res.status(400).json({ error: users.error });
+    } else {
+      res.status(200).json({ users });
+    }
+  } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
 });

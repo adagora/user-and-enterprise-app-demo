@@ -7,7 +7,7 @@ const pool = new Pool({
   port: 5432,
   user: "user123",
   password: "password123",
-  database: "db123",
+  database: "db123"
 });
 
 const dbReadPool = new Pool({
@@ -15,15 +15,15 @@ const dbReadPool = new Pool({
   port: 5432,
   user: "dbread",
   password: "dbread",
-  database: "db123",
+  database: "db123"
 });
 
-const dbWritePool = new Pool({
+const dbCreatePool = new Pool({
   host: "db",
   port: 5432,
-  user: "dbwrite",
-  password: "dbwrite",
-  database: "db123",
+  user: "dbcreate",
+  password: "dbcreate",
+  database: "db123"
 });
 
 async function createTables() {
@@ -35,4 +35,4 @@ async function createTables() {
   }
 }
 
-module.exports = { dbReadPool, dbWritePool, createTables };
+module.exports = { dbReadPool, dbCreatePool, createTables };
