@@ -1,3 +1,6 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 class EnterprisesService {
   constructor(database) {
     this.db = database;
@@ -79,7 +82,7 @@ class EnterprisesService {
         return { error: "Invalid permissions" };
       }
 
-      const requiredPermissions = ["perm1", "perm2"];
+      const requiredPermissions = [process.env.PERM1, process.env.PERM2];
       if (
         permissions.length > 2 ||
         !requiredPermissions.every((permission) =>

@@ -1,4 +1,7 @@
 const EnterprisesService = require("./enterprisesService");
+const dotenv = require("dotenv");
+dotenv.config();
+
 const mockDb = {
   connect: jest.fn()
 };
@@ -10,7 +13,9 @@ describe("EnterprisesService", () => {
 
   it("should return error for invalid user hashes", async () => {
     const enterprisesService = new EnterprisesService(mockDb);
-    const result = await enterprisesService.addUsers("taxId", null, ["perm1"]);
+    const result = await enterprisesService.addUsers("taxId", null, [
+      process.env.PERM1
+    ]);
     expect(result.error).toEqual("Invalid user hashes");
   });
 
@@ -19,7 +24,7 @@ describe("EnterprisesService", () => {
     const result = await enterprisesService.addUsers(
       "7162828483",
       [],
-      ["perm1", "perm2"]
+      [process.env.PERM1, process.env.PERM2]
     );
     expect(result.error).toEqual("Invalid user hashes");
   });
@@ -29,7 +34,7 @@ describe("EnterprisesService", () => {
     const result = await enterprisesService.addUsers(
       null,
       ["0xHash1", "0xHash2"],
-      ["perm1", "perm2"]
+      [process.env.PERM1, process.env.PERM2]
     );
     expect(result.error).toEqual("Invalid tax ID");
   });
@@ -49,7 +54,7 @@ describe("EnterprisesService", () => {
     const result = await enterprisesService.addUsers(
       "7162828483",
       ["0xHash1", "0xHash2"],
-      ["perm1"]
+      [process.env.PERM1]
     );
     expect(result.error).toEqual(
       "Invalid permissions, you do not have enough permission"
@@ -61,7 +66,7 @@ describe("EnterprisesService", () => {
     const result = await enterprisesService.addUsers(
       "7162828483",
       ["0xHash1", "0xHash2"],
-      ["perm1", "perm2", "perm3"]
+      [process.env.PERM1, process.env.PERM2, process.env.PERM3]
     );
     expect(result.error).toEqual(
       "Invalid permissions, you do not have enough permission"
@@ -73,7 +78,7 @@ describe("EnterprisesService", () => {
     const result = await enterprisesService.addUsers(
       "7162828483",
       ["0xHash1", "0xHash2"],
-      ["perm1", "invalidPerm"]
+      [process.env.PERM1, "invalidPerm"]
     );
     expect(result.error).toEqual(
       "Invalid permissions, you do not have enough permission"
@@ -89,7 +94,7 @@ describe("EnterprisesService", () => {
     const result1 = await enterprisesService.addUsers(
       "7162828483",
       ["0xHash1", "0xHash2"],
-      ["perm1", "perm2"]
+      [process.env.PERM1, process.env.PERM2]
     );
 
     mockDb.connect.mockResolvedValueOnce({
@@ -99,7 +104,7 @@ describe("EnterprisesService", () => {
     const result2 = await enterprisesService.addUsers(
       "7162828483",
       ["0xHash1", "0xHash2"],
-      ["perm1", "perm2"]
+      [process.env.PERM1, process.env.PERM2]
     );
 
     expect(result2.error).toEqual("An error occurred while adding users");
@@ -122,7 +127,7 @@ describe("EnterprisesService", () => {
     const result = await enterprisesService.addUsers(
       "7162828483",
       ["0xHash1", "0xHash2"],
-      ["perm1", "perm2"]
+      [process.env.PERM1, process.env.PERM2]
     );
 
     expect(result).toEqual({ success: true, message: "Users added" });

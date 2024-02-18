@@ -1,29 +1,31 @@
 const { Pool } = require("pg");
 const fs = require("fs");
 const sql = fs.readFileSync("schema.sql").toString();
+const dotenv = require("dotenv");
+dotenv.config();
 
 const pool = new Pool({
-  host: "db",
-  port: 5432,
-  user: "user123",
-  password: "password123",
-  database: "db123"
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
 });
 
 const dbReadPool = new Pool({
-  host: "db",
-  port: 5432,
-  user: "dbread",
-  password: "dbread",
-  database: "db123"
+  host: process.env.DB_READ_HOST,
+  port: process.env.DB_READ_PORT,
+  user: process.env.DB_READ_USER,
+  password: process.env.DB_READ_PASSWORD,
+  database: process.env.DB_READ_DATABASE
 });
 
 const dbCreatePool = new Pool({
-  host: "db",
-  port: 5432,
-  user: "dbcreate",
-  password: "dbcreate",
-  database: "db123"
+  host: process.env.DB_CREATE_HOST,
+  port: process.env.DB_CREATE_PORT,
+  user: process.env.DB_CREATE_USER,
+  password: process.env.DB_CREATE_PASSWORD,
+  database: process.env.DB_CREATE_DATABASE
 });
 
 async function createTables() {

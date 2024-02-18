@@ -12,6 +12,6 @@ Content-Type: application/json
 {
     "taxId": "7162828483",
     "userHashes": ["0xHash1", "0xHash2"],
-    "permissions": ["perm1", "perm2",]
+    "permissions": ["perm1", "perm2"]
 }
 
